@@ -22,6 +22,6 @@ Prompt.init(
         underscored: true,
         modelName: 'prompt'
     }
-)
+);
 
 module.exports = Prompt;

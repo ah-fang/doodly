@@ -37,6 +37,6 @@ Guess.init(
         underscored: true,
         modelName: 'guess'
     }
-)
+);
 
 module.exports = Guess;

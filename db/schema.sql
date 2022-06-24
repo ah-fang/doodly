@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS draw_game;
+
+CREATE DATABASE draw_game;

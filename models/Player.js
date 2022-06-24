@@ -23,6 +23,6 @@ Player.init(
         underscored: true,
         modelName: 'player'
     }
-)
+);
 
 module.exports = Player;
