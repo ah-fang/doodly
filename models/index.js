@@ -3,6 +3,8 @@ const Prompt = require('./Prompt');
 const Drawing = require('./Drawing');
 const Vote = require('./Vote');
 const Guess = require('./Guess');
+const Game = require('./Game');
+
 
 Player.hasOne(Drawing, {
     foreignKey: 'player_id'
@@ -41,4 +43,4 @@ Drawing.hasMany(Guess, {
     foreignKey: 'drawing_id'
 });
 
-module.exports = { Player, Drawing, Vote, Comment };
+module.exports = { Player, Drawing, Vote, Comment, Guess, Prompt, Game };
