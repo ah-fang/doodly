@@ -1,35 +1,25 @@
 const express = require("express");
-const mysql = require("mysql");
+// const mysql = require("mysql2");
 const app = express();
+const Sequelize = require('sequelize');
 
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "root",
-  database: "Players_db",
-  port: "3306"
-});
+let sequelize;
 
-connection.connect((err) => {
-    if (err) {
-         throw err
-} else {
-        console.log("connected")
-    }
-})
+require('dotenv').config();
 
-connection.query("CREATE TABLE tablePlayers(id INT(255) UNSIGNED AUTO_INCREMENT PRIMARY KEY, thing VARCHAR(255) NOT NULL)", (err,rows) => {
-    if(err){
-        throw err
-    } else {
-        console.log("DATA SENT BOIS")
-        console.log(rows)
-    }
-})
+if (process.env.JAWSDB_URL) {
+    sequelize = new Sequelize(process.env.JAWSDB_URL);
+  } else {
+    sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+      host: 'localhost',
+      dialect: 'mysql',
+      port: 3306
+    });
+  }
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 app.listen(port);
 
-console.log("App is listening on port" + port)
+console.log("App is listening on port " + port)
 
 
