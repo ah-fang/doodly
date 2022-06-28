@@ -1,25 +1,35 @@
-const express = require("express");
-// const mysql = require("mysql2");
+const express = require('express');
+const routes = require('./controllers');
+const sequelize = require('./config/connection');
+const path = require('path'); 
+const session = require('express-session');
+const exphbs = require('express-handlebars');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const helpers = require('./utils/helpers');
+const hbs = exphbs.create({ helpers });
+
+const sess = {
+  secret: 'Super secret secret',
+  cookie: {},
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize
+  })
+};
+
 const app = express();
-const Sequelize = require('sequelize');
 
-let sequelize;
+const PORT = process.env.PORT || 3001;
 
-require('dotenv').config();
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars'); 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public'))); 
+app.use(session(sess));
+app.use(routes);
 
-if (process.env.JAWSDB_URL) {
-    sequelize = new Sequelize(process.env.JAWSDB_URL);
-  } else {
-    sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
-      host: 'localhost',
-      dialect: 'mysql',
-      port: 3306
-    });
-  }
-
-const port = process.env.PORT || 3001;
-app.listen(port);
-
-console.log("App is listening on port " + port)
-
-
+sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () => console.log('Now listening'));
+}); 
