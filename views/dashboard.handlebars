@@ -1,0 +1,27 @@
+<section>
+    <h2>Create New Post</h2>
+    <div class="container">
+        <div>
+            <canvas id="canvas" width="800" height="500" style="display: block; margin: 0 auto;"></canvas>
+        </div>
+        <div id="post-div">
+            <span id="clear" class="post-btns">clear</span>
+            <span id="save" class="post-btns"> save </span>
+            <span id="post" class="post-btns"> post </span>
+            <input type="file" id="load" name="avatar" accept="image/png">
+        </div>
+    </div>
+</section>
+
+{{#if posts.length}}
+<section>
+    <h2>Your Posts</h2>
+    <ul class="homepage">
+        {{#each posts as |post|}}
+        <li>
+            {{> dashboard-info post }}
+        </li>
+        {{/each}}
+    </ul>
+</section>
+{{/if}}
