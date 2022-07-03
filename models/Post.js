@@ -13,7 +13,7 @@ class Post extends Model {
               },
               attributes: [
                 'id',
-                // 'post_url',
+                'drawing_url',
                 'title',
                 'created_at',
                 [
@@ -39,13 +39,13 @@ Post.init(
             type: DataTypes.STRING,
             allowNull: false
         },
-        // post_url: {
-        //     type: DataTypes.STRING,
-        //     allowNull: false,
-        //     validate: {
-        //         isURL: true
-        //     }
-        // },
+        drawing_url: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                isURL: true
+            }
+        },
         draw_url: {
           type: DataTypes.STRING,
           allowNull: false,
