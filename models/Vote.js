@@ -5,33 +5,35 @@ class Vote extends Model {}
 
 Vote.init(
     {
-        vote_id: {
+        id: {
             type: DataTypes.INTEGER,
-            autoIncrement: true,
             primaryKey: true,
-            allowNull: false
+            autoIncrement: true
         },
-        guess_id: {
+        user_id: {
             type: DataTypes.INTEGER,
+            allowNull: false,
             references: {
-                model: 'guess',
+                model: 'user',
                 key: 'id'
             }
         },
-        player_id: {
+        post_id: {
             type: DataTypes.INTEGER,
+            allowNull: false,
             references: {
-                model: 'player',
+                model: 'post',
                 key: 'id'
             }
         }
     },
     {
         sequelize,
+        timestamps: false,
         freezeTableName: true,
         underscored: true,
         modelName: 'vote'
     }
-)
+);
 
 module.exports = Vote;
