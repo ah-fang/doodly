@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./css/main.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Doodly</title>
+</head>
+
+<body>
+    <header>
+        <div class="spin">
+            <!-- <h1>DOODLY</h1> -->
+            <span style="--i:1">D</span>
+            <span style="--i:2">O</span>
+            <span style="--i:3">O</span>
+            <span style="--i:4">D</span>
+            <span style="--i:5">L</span>
+            <span style="--i:6">Y</span>
+        </div>
+        <nav>
+            <a href="/dashboard" class="nav-btn">Dashboard</a>
+            <span id="logout" class="nav-btn">Logout</span>
+            <a href="/login" class="nav-btn">Login</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Create New Post</h2>
+            <div class="container">
+                <div>
+                    <canvas id="canvas" width="800" height="500" style="display: block; margin: 0 auto;"></canvas>
+                </div>
+                <div id="post-div">
+                    <span id="clear" class="post-btns">clear</span>
+                    <span id="save" class="post-btns"> save </span>
+                    <span id="post" class="post-btns"> post </span>
+                    <input type="file" id="load" name="avatar" accept="image/png">
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2>Your Posts</h2>
+            <ul class="homepage">
+                <li>
+                    <article>
+                        <!-- downloaded doodle drawing -->
+                        <div>
+                            <img src="./img/doodle-example.png" id="img">
+                        </div>
+                        <div id="post-info">
+                            <h2 id="post-title">kitty :)</h2>
+                            <h3 id="creator">By: Ryan 6/30/2022</h3>
+                            <button id="like" class="fa fa-thumbs-up"></button>
+                            <span id="likes">15 likes</span>
+                            <span id="delete">delete</span>
+                        </div>
+                    </article>
+                </li>
+                <li>
+                    <article>
+                        <!-- downloaded doodle drawing -->
+                        <div>
+                            <img src="./img/doodle-example.png" id="img">
+                        </div>
+                        <div id="post-info">
+                            <h2 id="post-title">kitty :)</h2>
+                            <h3 id="creator">By: Ryan 6/30/2022</h3>
+                            <button id="like" class="fa fa-thumbs-up"></button>
+                            <span id="likes">15 likes</span>
+                            <span id="delete">delete</span>
+                        </div>
+                    </article>
+                </li>
+                <li>
+                    <article>
+                        <!-- downloaded doodle drawing -->
+                        <div>
+                            <img src="./img/doodle-example.png" id="img">
+                        </div>
+                        <div id="post-info">
+                            <h2 id="post-title">kitty :)</h2>
+                            <h3 id="creator">By: Ryan 6/30/2022</h3>
+                            <button id="like" class="fa fa-thumbs-up"></button>
+                            <span id="likes">15 likes</span>
+                            <span id="delete">delete</span>
+                        </div>
+                    </article>
+                </li>
+                <li>
+                    <article>
+                        <!-- downloaded doodle drawing -->
+                        <div>
+                            <img src="./img/doodle-example.png" id="img">
+                        </div>
+                        <div id="post-info">
+                            <h2 id="post-title">kitty :)</h2>
+                            <h3 id="creator">By: Ryan 6/30/2022</h3>
+                            <button id="like" class="fa fa-thumbs-up"></button>
+                            <span id="likes">15 likes</span>
+                            <span id="delete">delete</span>
+                        </div>
+                    </article>
+                </li>
+            </ul>
+        </section>
+    </main>
+    <script src="./javascript/draw.js"></script>
+</body>
+
+</html>
