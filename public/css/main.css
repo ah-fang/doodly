@@ -5,6 +5,10 @@
     font-family: 'Oswald', sans-serif;
 }
 
+a {
+    text-decoration: none;
+}
+
 header {
     display: flex;
     justify-content: space-between;
