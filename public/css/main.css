@@ -123,6 +123,7 @@ article {
 
 #canvas {
     border: 1px solid black;
+    background-color: #fff;
 }
 
 #post-div {
