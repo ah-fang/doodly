@@ -66,3 +66,5 @@ class Drawing {
       };
       reader.readAsDataURL(file);
     })
+  }
+}

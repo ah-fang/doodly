@@ -1,38 +1,43 @@
-const Player = require('./Player');
-const Prompt = require('./Prompt');
-const Drawing = require('./Drawing');
+const User = require('./User');
+const Post = require('./Post');
 const Vote = require('./Vote');
-const Guess = require('./Guess');
+const Comment = require('./Comment');
 
-Player.hasOne(Drawing, {
-    foreignKey: 'player_id'
+
+User.hasMany(Post, {
+    foreignKey: 'user_id'
 });
 
-Player.hasOne(Prompt, {
-    foreignKey: 'player_id'
+Post.belongsTo(User, {
+    foreignKey: 'user_id',
 });
 
-Drawing.belongsTo(Player, {
-    foreignKey: 'player_id',
+User.belongsToMany(Post, {
+    through: Vote,
+    as: 'voted_posts',
+    foreignKey: 'user_id'
 });
 
-Prompt.belongsTo(Player, {
-    foreignKey: 'player_id'
-})
-
-//does guess belong to player or drawing?
-Guess.belongsTo(Player, {
-    foreignKey: 'player_id'
+Post.belongsToMany(User, {
+    through: Vote,
+    as: 'voted_posts',
+    foreignKey: 'post_id'
 });
 
-Vote.belongsTo()
-  
-Player.hasMany(Guess, {
-    foreignKey: 'player_id'
+Comment.belongsTo(User, {
+    foreignKey: 'user_id'
 });
   
-Drawing.hasMany(Guess, {
-    foreignKey: 'drawing_id'
+Comment.belongsTo(Post, {
+    foreignKey: 'post_id'
+});
+  
+User.hasMany(Comment, {
+    foreignKey: 'user_id'
+});
+  
+Post.hasMany(Comment, {
+    foreignKey: 'post_id'
 });
 
-module.exports = { Player, Drawing, Vote, Comment };
+module.exports = { User, Post, Vote, Comment };

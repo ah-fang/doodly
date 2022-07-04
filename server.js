@@ -1,35 +1,35 @@
-const express = require("express");
-const mysql = require("mysql");
+const express = require('express');
+const routes = require('./controllers');
+const sequelize = require('./config/connection');
+const path = require('path'); 
+const session = require('express-session');
+const exphbs = require('express-handlebars');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const helpers = require('./utils/helpers');
+const hbs = exphbs.create({ helpers });
+
+const sess = {
+  secret: 'Super secret secret',
+  cookie: {},
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize
+  })
+};
+
 const app = express();
 
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "root",
-  database: "Players_db",
-  port: "3306"
-});
+const PORT = process.env.PORT || 3001;
 
-connection.connect((err) => {
-    if (err) {
-         throw err
-} else {
-        console.log("connected")
-    }
-})
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars'); 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public'))); 
+app.use(session(sess));
+app.use(routes);
 
-connection.query("CREATE TABLE tablePlayers(id INT(255) UNSIGNED AUTO_INCREMENT PRIMARY KEY, thing VARCHAR(255) NOT NULL)", (err,rows) => {
-    if(err){
-        throw err
-    } else {
-        console.log("DATA SENT BOIS")
-        console.log(rows)
-    }
-})
-
-const port = process.env.PORT || 3000;
-app.listen(port);
-
-console.log("App is listening on port" + port)
-
-
+sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () => console.log('Now listening'));
+}); 

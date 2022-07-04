@@ -1,16 +1,28 @@
-<div class="container">
-    <div>
-      <canvas id="canvas" width="500" height="500"></canvas>
-    </div>
-    <div>
-      <button id="save" type="button">
-        save
-      </button>
-      <input
-        type="file"
-        id="load"
-        name="avatar"
-        accept="image/png"
-      >
-    </div>
-  </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doodly</title>
+</head>
+<body>
+    <div class="container">
+        <div>
+          <canvas id="canvas" width="500" height="500" style="display: block; margin: 0 auto;"></canvas>
+        </div>
+        <div>
+          <button id="save" type="button">
+            save
+          </button>
+          <input
+            type="file"
+            id="load"
+            name="avatar"
+            accept="image/png"
+          >
+        </div>
+      </div>
+    <script src="./javascript/draw.js"></script>
+</body>
+</html>
