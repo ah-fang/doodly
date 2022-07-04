@@ -16,7 +16,7 @@ async function signupFormHandler(event) {
         });
         if (response.ok) {
             console.log('Success');
-            alert("Signup successful! You may now log in with your email and password.")
+            alert("Signup successful! You may now log in with your username and password.")
         } else {
             alert(response.statusText);
         }
