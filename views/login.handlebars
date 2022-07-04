@@ -2,16 +2,19 @@
   <div class="main">
     <form class="login-form">
       <h3 class="sign" align="center">Sign in</h3>
-      <input class="un" type="text" align="center" placeholder="Username" id="un-login">
-      <input class="pass" type="password" align="center" placeholder="Password" id="pass-login">
-      <button type="submit" class="submit" align="center">Sign in</button>
+      <input class="un" type="email" align="center" placeholder="Username" id="un-login" required>
+      <input class="pass" type="password" align="center" placeholder="Password" id="pass-login" required>
+      <div>
+        <button type="submit" class="submit">Sign In</button>
+      </div>
     </form> 
            
     <form class="signup-form">
       <h3 class="sign" align="center">Sign Up</h3>
-      <input type="text" id="un-signup" class="un" align="center" placeholder="Username"/>
-      <input type="text" id="email-signup" class="un" placeholder="example@email.com"/>
-      <input class="pass" type="password" id="pass-signup" placeholder="Password"/>
+      <input type="text" id="un-signup" class="un" align="center" placeholder="Username" required/>
+      <input type="email" id="email-signup" class="un" placeholder="example@email.com" required/>
+      <input class="pass" type="password" id="pass-signup" placeholder="Password" required/>
+    <div>
       <button type="submit" class="submit">Sign Up</button>
   </form>
 </div>
