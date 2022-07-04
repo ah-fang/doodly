@@ -1,8 +1,8 @@
 async function signupFormHandler(event) {
     event.preventDefault();
-    const username = document.querySelector('#username-signup').value.trim();
+    const username = document.querySelector('#un-signup').value.trim();
     const email = document.querySelector('#email-signup').value.trim();
-    const password = document.querySelector('#password-signup').value.trim();
+    const password = document.querySelector('#pass-signup').value.trim();
 
     if (username && email && password) {
         const response = await fetch('/api/users', {
@@ -26,8 +26,8 @@ async function signupFormHandler(event) {
 async function loginFormHandler(event) {
     event.preventDefault();
   
-    const email = document.querySelector('#email-login').value.trim();
-    const password = document.querySelector('#password-login').value.trim();
+    const email = document.querySelector('#un-login').value.trim();
+    const password = document.querySelector('#pass-login').value.trim();
   
     if (email && password) {
         const response = await fetch('/api/users/login', {
