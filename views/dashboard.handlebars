@@ -1,6 +1,14 @@
-<section>
+<section class="container">
     <h2>Create New Post</h2>
-    <div class="container">
+    <form class="new-post-form">
+        <div class="details">
+            <label for="post-title">Title <em>(required)</em></label>
+            <input type="text" id="post-title" name="post-title" />
+        </div>
+        <div>
+            <label for="post-text">Description <em>(optional)</em></label>
+            <input type="text" id="post-text" name="post-text" />
+        </div>
         <div>
             <canvas id="canvas" width="600" height="500" style="display: block; margin: 0 auto;"></canvas>
         </div>
@@ -10,7 +18,9 @@
             <button id="post" class="post-btns"> post </button>
             <input type="file" id="load" name="avatar" accept="image/png">
         </div>
-    </div>
+        <button type="submit" class="btn">Create</button>
+    </form>
+
 </section>
 
 {{#if posts.length}}

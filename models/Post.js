@@ -13,8 +13,9 @@ class Post extends Model {
               },
               attributes: [
                 'id',
-                'drawing_url',
+                'draw_url',
                 'title',
+                'post_text',
                 'created_at',
                 [
                   sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'),
@@ -39,19 +40,13 @@ Post.init(
             type: DataTypes.STRING,
             allowNull: false
         },
-        drawing_url: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                isURL: true
-            }
-        },
         draw_url: {
-          type: DataTypes.STRING,
-          allowNull: false,
-          validate: {
-            isUrl: true
-          }
+          type: DataTypes.BLOB,
+          allowNull: false
+        },
+        post_text: {
+          type: DataTypes.TEXT,
+          allowNull: true
         },
         user_id: {
             type: DataTypes.INTEGER,

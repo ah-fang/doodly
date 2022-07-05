@@ -18,7 +18,7 @@ router.get('/:id', (req, res) => {
         include: [
             {
               model: Post,
-              attributes: ['id', 'title', 'drawing_url', 'created_at']
+              attributes: ['id', 'title', 'draw_url', 'post_text','created_at']
             },
             {
               model: Post,

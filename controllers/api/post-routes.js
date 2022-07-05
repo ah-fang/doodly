@@ -6,8 +6,9 @@ const withAuth = require('../../utils/auth');
 router.get('/', (req, res) => {
     Post.findAll({
         attributes: ['id', 
-        'drawing_url', 
+        'draw_url', 
         'title', 
+        'post_text',
         'created_at',
         [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
         ],
@@ -40,8 +41,9 @@ router.get('/:id', (req, res) => {
             id: req.params.id
         },
         attributes: ['id', 
-        'drawing_url', 
+        'draw_url', 
         'title', 
+        'post_text',
         'created_at',
         [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
         ],
@@ -76,7 +78,8 @@ router.get('/:id', (req, res) => {
 router.post('/', withAuth, (req, res) => {
     Post.create({
         title: req.body.title,
-        drawing_url: req.body.drawing_url,
+        draw_url: req.body.draw_url,
+        post_text: req.body.post_text,
         user_id: req.session.user_id
     })
         .then(dbPostData => res.json(dbPostData))

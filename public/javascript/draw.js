@@ -4,12 +4,11 @@ window.onload = () => {
   const canvas = document.getElementById('canvas');
   const saveButton = document.getElementById('save');
   const loadInput = document.getElementById('load');
-   new Drawing(canvas, saveButton, loadInput);
-   
-  document.querySelector("#save").addEventListener("click", saveBtnHandler);
-  // document.querySelector(".delete-btn").addEventListener("click", deleteBtnHandler);
-  
+  new Drawing(canvas, saveButton, loadInput);
+
   document.querySelector("#clear").addEventListener("click", clearBtnHandler);
+  document.querySelector("#post").addEventListener("click", postBtnHandler);
+  // document.querySelector(".delete-btn").addEventListener("click", deleteBtnHandler);
   
 };
 
@@ -63,6 +62,7 @@ class Drawing {
   }
   // saves your image to your computer 
   save() {
+    
     const data = this.canvas.toDataURL("image/png");
     const a = document.createElement("a");
     a.href = data;
@@ -93,24 +93,44 @@ class Drawing {
       reader.readAsDataURL(file);
     });
   }
+
 }
+
 const clearBtnHandler = () => {
   const canvas = document.getElementById('canvas');
   const context = canvas.getContext('2d');
   context.clearRect(0, 0, canvas.width, canvas.height);
   console.log("the clear button was pressed");
 }
-const saveBtnHandler = async(event) => {
+const postBtnHandler = async(event) => {
   //save the drawing to a url and send all its relevant info to db in post request
   event.preventDefault();
-  //*******add method to give post a title*******
+
+  const data = this.canvas.toDataURL("image/png");
+  const a = document.createElement("a");
+  a.href = data;
+
+  // a.download = "image.png";
+  a.click();
+  var fileData = 
+  fs.writeFile('./README.md', fileData, err => {
+      if(err) {
+          console.log(err);
+          return;
+      }
+
+      console.log("File created successfully");
+  });
+  const canvas = document.getElementById('canvas');
+  const context = canvas.getContext('2d');
   const title = document.querySelector('input[name="post-title"]').value;
-  const drawing_url = document.querySelector('.canvas').toDataURL;
+  const post_text = document.querySelector('input[name="post-text"]').value;
+  const draw_url = context.save();
 
   const response = await fetch(`/api/posts`, {
       method: 'POST',
       body: JSON.stringify({
-          title, drawing_url
+          title, draw_url, post_text
       }),
       headers: {
           'Content-Type': 'application/json'
@@ -118,6 +138,7 @@ const saveBtnHandler = async(event) => {
   });
 
   if(response.ok) {
+      console.log('successfully posted');
       document.location.replace('/dashboard');
       newPostBtn.setAttribute('style', 'display: block');
   } else {
@@ -143,4 +164,6 @@ const deleteBtnHandler = async(event) => {
       alert(response.statusText);
   }
 }
+
+
 
