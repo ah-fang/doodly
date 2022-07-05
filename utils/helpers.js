@@ -13,14 +13,13 @@ const makeId = () => {
 const format_url = (req, res, next )=> {
     const imgUrlId = makeId();
     const imgUrl = `public/images/${imgUrlId}`;
-    console.log(req.body.draw_url);
-    const draw_url = req.body.draw_url;
+    // const draw_url = req.body.draw_url;
 
     // strip off the data: url prefix to get just the base64-encoded bytes
-    // const data = req.body.draw_url.replace(/^data:image\/\w+;base64,/, "");
+    const data = req.body.draw_url.replace(/^data:image\/\w+;base64,/, "");
 
     // const buf = Buffer.from(data, "base64");
-    fs.writeFile(imgUrl, draw_url, (err) => {
+    fs.writeFile(imgUrl, data, (err) => {
         if(err) {
             console.log(err);
             return;
@@ -31,6 +30,21 @@ const format_url = (req, res, next )=> {
             next();
         }
     });
-}
 
-module.exports = format_url;
+}
+const unformat_url = (dbPostData) => {
+    // take draw_url from get request
+    let fileName = dbPostData.draw_url.split("/")[2];
+    fs.readFile(`./public/images/${fileName}`, 'base64', (err, data) => {
+        if(err) {
+            console.log(err);
+            return;
+        }
+        else {
+            req.body.draw_url = data;
+            console.log("Here's your data");
+            console.log(data);
+        }
+    });
+}
+module.exports = { format_url, unformat_url };

@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { Post, User, Vote, Comment } = require('../../models');
 const sequelize = require('../../config/connection'); 
 const withAuth = require('../../utils/auth');
-const format_url = require('../../utils/helpers');
+const { format_url, unformat_url }  = require('../../utils/helpers');
 const fs = require('fs').promises;
 const { UUID } = require('sequelize');
 
@@ -32,8 +32,14 @@ router.get('/', (req, res) => {
             }
         ]
     })
-        .then(dbPostData => res.json(dbPostData))
-        .catch(err => {
+    .then(dbPostData => {
+        //function that converts filepath back to dataUrl
+        unformat_url(dbPostData);
+        console.log(dbPostData);
+        console.log("hi");
+        res.json(dbPostData);
+    })        
+    .catch(err => {
             console.log(err);
             res.status(500).json(err);
         });
@@ -72,6 +78,9 @@ router.get('/:id', (req, res) => {
                 return;
             }
             //function that converts filepath back to dataUrl
+            unformat_url(dbPostData);
+            console.log(dbPostData);
+            console.log("hi");
             res.json(dbPostData);
         })
         .catch(err => {
