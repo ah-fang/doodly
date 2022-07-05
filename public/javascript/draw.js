@@ -1,3 +1,6 @@
+const fs = require('fs');
+const { UUID } = require('sequelize');
+
 // loads the canvas upon loading the page
 window.onload = () => {
 
@@ -96,24 +99,23 @@ class Drawing {
 
 }
 
-const clearBtnHandler = () => {
+const clearBtnHandler = (event) => {
+  event.preventDefault();
+  
   const canvas = document.getElementById('canvas');
   const context = canvas.getContext('2d');
   context.clearRect(0, 0, canvas.width, canvas.height);
   console.log("the clear button was pressed");
 }
+
 const postBtnHandler = async(event) => {
   //save the drawing to a url and send all its relevant info to db in post request
   event.preventDefault();
 
   const data = this.canvas.toDataURL("image/png");
-  const a = document.createElement("a");
-  a.href = data;
+  const imgURL = new UUID;
 
-  // a.download = "image.png";
-  a.click();
-  var fileData = 
-  fs.writeFile('./README.md', fileData, err => {
+  fs.writeFile(`./images/${imgURL}`, data, err => {
       if(err) {
           console.log(err);
           return;
