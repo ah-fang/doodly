@@ -1,23 +1,23 @@
-const fs = require('fs');
-const { UUID } = require('sequelize');
+// const fs = require('fs');
+// const { UUID } = require('sequelize');
 
 // loads the canvas upon loading the page
 window.onload = () => {
+  // document.querySelector("#clear").addEventListener("click", clearBtnHandler);
+  // document.querySelector("#post").addEventListener("click", postBtnHandler);
 
   const canvas = document.getElementById('canvas');
+  const clearButton = document.getElementById('clear');
   const saveButton = document.getElementById('save');
   const loadInput = document.getElementById('load');
-  new Drawing(canvas, saveButton, loadInput);
 
-  document.querySelector("#clear").addEventListener("click", clearBtnHandler);
-  document.querySelector("#post").addEventListener("click", postBtnHandler);
-  // document.querySelector(".delete-btn").addEventListener("click", deleteBtnHandler);
-  
+  new Drawing(canvas, clearButton, saveButton, loadInput);  
 };
+
 
 // creates the drawing events
 class Drawing {
-  constructor(canvas, saveButton, loadInput) {
+  constructor(canvas, clearButton, saveButton, loadInput) {
     this.isDrawing = false;
 
     // mouse down is when you click and mouseup is when you release
@@ -25,7 +25,9 @@ class Drawing {
     canvas.addEventListener("mousemove", (event) => this.draw(event));
     canvas.addEventListener("mouseup", () => this.stopDrawing());
 
+    clearButton.addEventListener("click", () => this.clear());
     saveButton.addEventListener("click", () => this.save());
+    // postButton.addEventListener("click", () => this.post());
     loadInput.addEventListener("change", (event) => this.load(event));
     // rect aligns the cursor with the canvas
     const rect = canvas.getBoundingClientRect();
@@ -36,7 +38,6 @@ class Drawing {
     this.canvas = canvas;
     this.context = this.canvas.getContext("2d");
   }
-  // isDrawing defaults to false to prevent drawing without clicking
   startDrawing() {
     this.isDrawing = true;
   }
@@ -45,7 +46,6 @@ class Drawing {
     // adding beginPath here allows you to disconnect the line when you release and start drawing in a new space 
     this.context.beginPath();
   }
-  // this makes the drawing a continuous line
   draw(event) {
     if (this.isDrawing) {
       this.context.strokeStyle = "#000";
@@ -63,6 +63,10 @@ class Drawing {
       );
     }
   }
+
+  clear() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+  }
   // saves your image to your computer 
   save() {
     
@@ -72,6 +76,7 @@ class Drawing {
     a.download = "image.png";
     a.click();
   }
+
   load(event) {
     const file = [...event.target.files].pop();
     this.readTheFile(file).then((image) => this.loadTheImage(image));
@@ -100,34 +105,29 @@ class Drawing {
 }
 
 const clearBtnHandler = (event) => {
-  event.preventDefault();
-  
+  event.preventDefault();  
   const canvas = document.getElementById('canvas');
   const context = canvas.getContext('2d');
   context.clearRect(0, 0, canvas.width, canvas.height);
-  console.log("the clear button was pressed");
 }
 
 const postBtnHandler = async(event) => {
   //save the drawing to a url and send all its relevant info to db in post request
   event.preventDefault();
 
-  const data = this.canvas.toDataURL("image/png");
-  const imgURL = new UUID;
+  // const imgURL = makeId();
+  // fs.writeFile(`./images/${imgURL}`, data, err => {
+  //     if(err) {
+  //         console.log(err);
+  //         return;
+  //     }
 
-  fs.writeFile(`./images/${imgURL}`, data, err => {
-      if(err) {
-          console.log(err);
-          return;
-      }
-
-      console.log("File created successfully");
-  });
+  //     console.log("File created successfully");
+  // });
   const canvas = document.getElementById('canvas');
-  const context = canvas.getContext('2d');
+  const draw_url = canvas.toDataURL("image/png");
   const title = document.querySelector('input[name="post-title"]').value;
   const post_text = document.querySelector('input[name="post-text"]').value;
-  const draw_url = context.save();
 
   const response = await fetch(`/api/posts`, {
       method: 'POST',
@@ -142,7 +142,6 @@ const postBtnHandler = async(event) => {
   if(response.ok) {
       console.log('successfully posted');
       document.location.replace('/dashboard');
-      newPostBtn.setAttribute('style', 'display: block');
   } else {
       alert(response.statusText);
   }
@@ -167,5 +166,4 @@ const deleteBtnHandler = async(event) => {
   }
 }
 
-
-
+document.getElementById('post').addEventListener('click', postBtnHandler);

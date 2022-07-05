@@ -2,6 +2,10 @@ const router = require('express').Router();
 const { Post, User, Vote, Comment } = require('../../models');
 const sequelize = require('../../config/connection'); 
 const withAuth = require('../../utils/auth');
+const format_url = require('../../utils/helpers');
+const fs = require('fs').promises;
+const { UUID } = require('sequelize');
+
 
 router.get('/', (req, res) => {
     Post.findAll({
@@ -67,6 +71,7 @@ router.get('/:id', (req, res) => {
                 res.status(404).json({ message: 'No post found with this id' });
                 return;
             }
+            //function that converts filepath back to dataUrl
             res.json(dbPostData);
         })
         .catch(err => {
@@ -75,7 +80,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
-router.post('/', withAuth, (req, res) => {
+router.post('/', withAuth, format_url, (req, res) => {
     Post.create({
         title: req.body.title,
         draw_url: req.body.draw_url,
