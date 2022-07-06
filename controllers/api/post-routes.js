@@ -29,19 +29,7 @@ router.get('/', (req, res) => {
         ]
     })
     .then(dbPostData => {
-        //function that converts filepath back to dataUrl
-        // var plain_data = dbPostData.map(id => {
-        //     return id.get({plain: true});
-        // });
-        // console.log(plain_data);
-        // unformat_url(dbPostData.toJSON(), (data) => {
-        //     let swap_data = { ...dbPostData };
-        //     swap_data.draw_url = data;
-        //     res.json(swap_data);
-        // });
-        // console.log(swap_data);
         res.json(dbPostData);
-
     })        
     .catch(err => {
             console.log(err);

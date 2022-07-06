@@ -112,18 +112,8 @@ const clearBtnHandler = (event) => {
 }
 
 const postBtnHandler = async(event) => {
-  //save the drawing to a url and send all its relevant info to db in post request
   event.preventDefault();
 
-  // const imgURL = makeId();
-  // fs.writeFile(`./images/${imgURL}`, data, err => {
-  //     if(err) {
-  //         console.log(err);
-  //         return;
-  //     }
-
-  //     console.log("File created successfully");
-  // });
   const canvas = document.getElementById('canvas');
   const draw_url = canvas.toDataURL("image/png");
   const title = document.querySelector('input[name="post-title"]').value;
