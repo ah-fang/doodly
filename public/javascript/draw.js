@@ -1,11 +1,5 @@
-// const fs = require('fs');
-// const { UUID } = require('sequelize');
-
-// loads the canvas upon loading the page
 window.onload = () => {
-  // document.querySelector("#clear").addEventListener("click", clearBtnHandler);
-  // document.querySelector("#post").addEventListener("click", postBtnHandler);
-
+  
   const canvas = document.getElementById('canvas');
   const clearButton = document.getElementById('clear');
   const saveButton = document.getElementById('save');
@@ -14,22 +8,17 @@ window.onload = () => {
   new Drawing(canvas, clearButton, saveButton, loadInput);  
 };
 
-
-// creates the drawing events
 class Drawing {
   constructor(canvas, clearButton, saveButton, loadInput) {
     this.isDrawing = false;
 
-    // mouse down is when you click and mouseup is when you release
     canvas.addEventListener("mousedown", () => this.startDrawing());
     canvas.addEventListener("mousemove", (event) => this.draw(event));
     canvas.addEventListener("mouseup", () => this.stopDrawing());
 
     clearButton.addEventListener("click", () => this.clear());
     saveButton.addEventListener("click", () => this.save());
-    // postButton.addEventListener("click", () => this.post());
     loadInput.addEventListener("change", (event) => this.load(event));
-    // rect aligns the cursor with the canvas
     const rect = canvas.getBoundingClientRect();
 
     this.offsetLeft = rect.left;
@@ -43,7 +32,6 @@ class Drawing {
   }
   stopDrawing() {
     this.isDrawing = false;
-    // adding beginPath here allows you to disconnect the line when you release and start drawing in a new space 
     this.context.beginPath();
   }
   draw(event) {

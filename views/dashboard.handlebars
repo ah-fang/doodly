@@ -1,11 +1,11 @@
 <section class="container">
-    <h2>Create New Post</h2>
+    <h2 id="new-post-title">Create New Post</h2>
     <form class="new-post-form">
         <div class="details">
             <label for="post-title">Title <em>(required)</em></label>
             <input type="text" id="post-title" name="post-title" />
         </div>
-        <div>
+        <div class="details">
             <label for="post-text">Description <em>(optional)</em></label>
             <input type="text" id="post-text" name="post-text" />
         </div>
@@ -14,12 +14,12 @@
         </div>
         <div id="post-div">
             <button id="clear" class="post-btns">clear</button>
-            <input type="reset" class="post-btns" >
-            <button id="save" class="post-btns"> save </button>
+            <button id="save" class="post-btns"> save to file</button>
+            <label class="post-btns">upload file
+                <input type="file" id="load" name="avatar" accept="image/png" class="pseudo-post-btn"/>
+            </label>
             <button id="post" class="post-btns"> post </button>
-            <input type="file" id="load" name="avatar" accept="image/png">
         </div>
-        <button type="submit" class="btn">Create</button>
     </form>
 
 </section>
