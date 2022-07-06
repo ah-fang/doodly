@@ -1,5 +1,5 @@
 window.onload = () => {
-  
+
   const canvas = document.getElementById('canvas');
   const clearButton = document.getElementById('clear');
   const saveButton = document.getElementById('save');
@@ -56,8 +56,8 @@ class Drawing {
     context.clearRect(0, 0, canvas.width, canvas.height);
   }
   // saves your image to your computer 
-  save() {
-    
+  save(event) {
+    event.preventDefault();
     const data = this.canvas.toDataURL("image/png");
     const a = document.createElement("a");
     a.href = data;
