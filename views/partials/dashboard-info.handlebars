@@ -1,12 +1,12 @@
 <article>
     <div>
-        <img src="{{post_drawing}}" id="img">
+        <img id="img" src={{draw_url}}>
     </div>
     <div id="post-info">
-        <h2 id="post-title">{{post_title}}</h2>
-        <h3 id="creator">By: {{post.user_id}} {{post_date}}</h3>
+        <a href="/post/{{id}}" id="post-title">{{title}}</a>
+        <h3 id="creator">By: {{user.username}} on {{format_date created_at}}</h3>
         <button id="like" class="fa fa-thumbs-up"></button>
-        <span id="likes">{{post.vote_count}} likes</span>
-        <button id="delete">delete</button>
+        <span id="likes">{{vote_count}} likes</span>
+        {{!-- <button id="delete">delete</button> --}}
     </div>
 </article>

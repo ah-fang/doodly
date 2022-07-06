@@ -92,7 +92,7 @@ article {
 
 #img {
     border: 1px solid black;
-    width: 350px;
+    /* width: 350px; */
     height: 100%;
     background-color: #fff;
 }
