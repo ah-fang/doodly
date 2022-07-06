@@ -41,7 +41,7 @@ Post.init(
             allowNull: false
         },
         draw_url: {
-          type: DataTypes.BLOB,
+          type: DataTypes.TEXT,
           allowNull: false
         },
         post_text: {

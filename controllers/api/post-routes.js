@@ -2,10 +2,6 @@ const router = require('express').Router();
 const { Post, User, Vote, Comment } = require('../../models');
 const sequelize = require('../../config/connection'); 
 const withAuth = require('../../utils/auth');
-const { format_url, unformat_url }  = require('../../utils/helpers');
-const fs = require('fs').promises;
-const { UUID } = require('sequelize');
-
 
 router.get('/', (req, res) => {
     Post.findAll({
@@ -34,10 +30,18 @@ router.get('/', (req, res) => {
     })
     .then(dbPostData => {
         //function that converts filepath back to dataUrl
-        unformat_url(dbPostData);
-        console.log(dbPostData);
-        console.log("hi");
+        // var plain_data = dbPostData.map(id => {
+        //     return id.get({plain: true});
+        // });
+        // console.log(plain_data);
+        // unformat_url(dbPostData.toJSON(), (data) => {
+        //     let swap_data = { ...dbPostData };
+        //     swap_data.draw_url = data;
+        //     res.json(swap_data);
+        // });
+        // console.log(swap_data);
         res.json(dbPostData);
+
     })        
     .catch(err => {
             console.log(err);
@@ -78,7 +82,7 @@ router.get('/:id', (req, res) => {
                 return;
             }
             //function that converts filepath back to dataUrl
-            unformat_url(dbPostData);
+            // unformat_url(dbPostData);
             console.log(dbPostData);
             console.log("hi");
             res.json(dbPostData);
@@ -89,7 +93,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
-router.post('/', withAuth, format_url, (req, res) => {
+router.post('/', withAuth, (req, res) => {
     Post.create({
         title: req.body.title,
         draw_url: req.body.draw_url,
